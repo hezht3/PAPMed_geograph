@@ -14,17 +14,17 @@ require(ggplot2)
 require(maptools)
 require(raster)
 
-setwd("F:/Box Sync/Duke Kunshan University Intern/2 CCL/admin/network meeting/ChinaProvinceCityJsonData-master/CHN_adm/adm3")
+setwd("F:/Box Sync/Archives2020LLY/Zhengting/Duke Kunshan University Intern (zh133@duke.edu)/2 CCL/admin/network meeting/ChinaProvinceCityJsonData-master/CHN_adm/adm3")
 shape_data <- readShapeSpatial('CHN_adm3.shp')
 shape_data_taiwan <- readShapeSpatial('TWN_adm2.shp')
 shape_data_china <- union(shape_data, shape_data_taiwan)
 
 # map of China
-pdf(file = "F:/Box Sync/Duke Kunshan University Intern/2 CCL/admin/network meeting/geograph/China geograph.pdf", width = 18.05, height = 12.25)
+pdf(file = "F:/Box Sync/Archives2020LLY/Zhengting/Duke Kunshan University Intern (zh133@duke.edu)/2 CCL/admin/network meeting/geograph/graph_update/China geograph.pdf", width = 18.05, height = 12.25)
 ggplot() + 
   geom_polygon(aes(x = long, y = lat, fill = id), data = shape_data_china) +
   annotate(geom = "point", x = 120.866798, y = 32.074365, colour = "red", size = 4) +
-  ggtitle("Map of China") +
+  #ggtitle("Map of China") +
   theme_classic() +
   theme(axis.ticks = element_blank(), axis.text = element_blank(), axis.title = element_blank(), axis.line = element_blank(),
         plot.title = element_text(face = "bold", size = 30, hjust = 0.5, vjust = -4)) +
@@ -42,7 +42,7 @@ shape_nantong <- shape_data %>%
   fortify() %>% 
   filter(id %in% id_nantong)
 
-pdf(file = "F:/Box Sync/Duke Kunshan University Intern/2 CCL/admin/network meeting/geograph/Nantong geograph.pdf", width = 18.05, height = 12.25)
+pdf(file = "F:/Box Sync/Archives2020LLY/Zhengting/Duke Kunshan University Intern (zh133@duke.edu)/2 CCL/admin/network meeting/geograph/graph_update/Nantong geograph.pdf", width = 18.05, height = 12.25)
 ggplot() + 
   geom_polygon(aes(x = long, y = lat, fill = id), data = shape_nantong) +
   scale_fill_manual(values = c("#1cc7d0", "#b84592", "#8e43e7", "#ff4f81", "#2dde98", "#ffc168", "#ff6c5f", "#ff6c5f")) +
@@ -54,7 +54,7 @@ ggplot() +
   geom_text(aes(label = "Rudong", x = 121.07199, y = 32.36618), check_overlap = TRUE, size = 7, fontface = "bold") +
   geom_text(aes(label = "Rugao", x = 120.58965, y = 32.26743), check_overlap = TRUE, size = 7, fontface = "bold") +
   geom_text(aes(label = "Hai'an", x = 120.46460, y = 32.52962), check_overlap = TRUE, size = 7, fontface = "bold") +
-  ggtitle("Map of Nantong city") +
+  #ggtitle("Map of Nantong city") +
   theme_classic() +
   theme(axis.ticks = element_blank(), axis.text = element_blank(), axis.title = element_blank(), axis.line = element_blank(),
         plot.title = element_text(face = "bold", size = 30, hjust = 0.5, vjust = -4)) +
@@ -62,12 +62,12 @@ ggplot() +
 dev.off()
 
 # map of study villages: group by location
-location <- read.csv("F:/Box Sync/Duke Kunshan University Intern/2 CCL/admin/network meeting/geograph/pingchao and liuqiao2.csv")
+location <- read.csv("F:/Box Sync/Archives2020LLY/Zhengting/Duke Kunshan University Intern (zh133@duke.edu)/2 CCL/admin/network meeting/geograph/pingchao and liuqiao2.csv")
 shape_tongzhou <- shape_data %>% 
   fortify() %>% 
   filter(id %in% 1140)
 
-pdf(file = "F:/Box Sync/Duke Kunshan University Intern/2 CCL/admin/network meeting/geograph/site geograph1.pdf", width = 18.05, height = 12.25)
+pdf(file = "F:/Box Sync/Archives2020LLY/Zhengting/Duke Kunshan University Intern (zh133@duke.edu)/2 CCL/admin/network meeting/geograph/graph_update/site geograph1.pdf", width = 18.05, height = 12.25)
 ggplot() + 
   geom_polygon(aes(x = long, y = lat), data = shape_tongzhou, fill = "#f0f0f0") +
   geom_point(data = location, aes(x = long, y = lat, colour = group), size = 2.5) +
@@ -75,7 +75,7 @@ ggplot() +
   geom_text(aes(label = "Pingchao", x = 120.75808, y = 32.14120), check_overlap = TRUE, size = 5, fontface = "bold") +
   geom_text(aes(label = "Liuqiao", x = 120.86361, y = 32.19931), check_overlap = TRUE, size = 5, fontface = "bold") +
   geom_text(aes(label = "Tongzhou", x = 121.07331, y = 32.06588), check_overlap = TRUE, size = 8, fontface = "bold") +
-  ggtitle("Geographic location of study villages") +
+  #ggtitle("Geographic location of study villages") +
   theme_classic() +
   theme(axis.ticks = element_blank(), axis.text = element_blank(), axis.title = element_blank(), axis.line = element_blank(),
         legend.title = element_blank(), legend.text = element_text(size = 15, face = "bold"), legend.position = "bottom",
@@ -83,15 +83,15 @@ ggplot() +
 dev.off()
 
 # map of study villages: group by randomization
-pdf(file = "F:/Box Sync/Duke Kunshan University Intern/2 CCL/admin/network meeting/geograph/site geograph3.pdf", width = 18.05, height = 12.25)
+pdf(file = "F:/Box Sync/Archives2020LLY/Zhengting/Duke Kunshan University Intern (zh133@duke.edu)/2 CCL/admin/network meeting/geograph/graph_update/site geograph3.pdf", width = 18.05, height = 12.25)
 ggplot() + 
   geom_polygon(aes(x = long, y = lat), data = shape_tongzhou, fill = "#f4f5f6") +
   geom_point(data = location, aes(x = long, y = lat, colour = random), size = 2.5) +
-  scale_color_manual(values = c("#606c76", "#9b4dca")) +
+  scale_color_manual(values = c("#606c76", "#9b4dca", "#9b4dca")) +
   geom_text(aes(label = "Pingchao", x = 120.75808, y = 32.14120), check_overlap = TRUE, size = 5, fontface = "bold") +
   geom_text(aes(label = "Liuqiao", x = 120.86361, y = 32.19931), check_overlap = TRUE, size = 5, fontface = "bold") +
   geom_text(aes(label = "Tongzhou", x = 121.07331, y = 32.06588), check_overlap = TRUE, size = 8, fontface = "bold") +
-  ggtitle("Geographic location of study villages") +
+  #ggtitle("Geographic location of study villages") +
   theme_classic() +
   theme(axis.ticks = element_blank(), axis.text = element_blank(), axis.title = element_blank(), axis.line = element_blank(),
         legend.title = element_blank(), legend.text = element_text(size = 15, face = "bold"), legend.position = "bottom",
@@ -100,7 +100,7 @@ dev.off()
 
 # part of the map of study villages: group by location
 shape_tongzhou <- subset(shape_tongzhou, long < 120.95 & lat > 32.05)
-pdf(file = "F:/Box Sync/Duke Kunshan University Intern/2 CCL/admin/network meeting/geograph/site geograph2.pdf", width = 18.05, height = 12.25)
+pdf(file = "F:/Box Sync/Archives2020LLY/Zhengting/Duke Kunshan University Intern (zh133@duke.edu)/2 CCL/admin/network meeting/geograph/graph_update/site geograph2.pdf", width = 18.05, height = 12.25)
 ggplot() + 
   geom_polygon(aes(x = long, y = lat), data = shape_tongzhou, fill = "#f0f0f0") +
   geom_point(data = location, aes(x = long, y = lat, colour = group), size = 1.5) +
@@ -113,7 +113,7 @@ ggplot() +
   geom_text(aes(label = "The 8th People's Hospital of Tongzhou", x = 120.76025, y = 32.102976), size = 5, fontface = "bold") +
   geom_text(aes(label = "Pingchao", x = 120.75808, y = 32.14120), check_overlap = TRUE, size = 6, fontface = "bold") +
   geom_text(aes(label = "Liuqiao", x = 120.86361, y = 32.19431), check_overlap = TRUE, size = 6, fontface = "bold") +
-  ggtitle("Geographic location of study villages") +
+  #ggtitle("Geographic location of study villages") +
   theme_classic() +
   theme(axis.ticks = element_blank(), axis.text = element_blank(), axis.title = element_blank(), axis.line = element_blank(),
         legend.title = element_blank(), legend.text = element_text(size = 15, face = "bold"), legend.position = "bottom", 
@@ -122,7 +122,7 @@ dev.off()
 
 # part of the map of study villages: group by randomization
 location <- subset(location, random != "drop")
-pdf(file = "F:/Box Sync/Duke Kunshan University Intern/2 CCL/admin/network meeting/geograph/site geograph4.pdf", width = 18.05, height = 12.25)
+pdf(file = "F:/Box Sync/Archives2020LLY/Zhengting/Duke Kunshan University Intern (zh133@duke.edu)/2 CCL/admin/network meeting/geograph/graph_update/site geograph4.pdf", width = 18.05, height = 12.25)
 ggplot() + 
   geom_polygon(aes(x = long, y = lat), data = shape_tongzhou, fill = "#f4f5f6") +
   geom_point(data = location, aes(x = long, y = lat, colour = random), size = 1.5) +
@@ -135,7 +135,7 @@ ggplot() +
   geom_text(aes(label = "The 8th People's Hospital of Tongzhou", x = 120.76025, y = 32.102976), size = 4, fontface = "bold") +
   geom_text(aes(label = "Pingchao", x = 120.75808, y = 32.14120), check_overlap = TRUE, size = 6, fontface = "bold") +
   geom_text(aes(label = "Liuqiao", x = 120.86361, y = 32.19431), check_overlap = TRUE, size = 6, fontface = "bold") +
-  ggtitle("Randomization result of study villages") +
+  #ggtitle("Randomization result of study villages") +
   theme_classic() +
   theme(axis.ticks = element_blank(), axis.text = element_blank(), axis.title = element_blank(), axis.line = element_blank(),
         legend.title = element_blank(), legend.text = element_text(size = 15, face = "bold"), legend.position = "bottom", 
